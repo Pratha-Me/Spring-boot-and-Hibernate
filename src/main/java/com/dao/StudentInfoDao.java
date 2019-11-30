@@ -12,16 +12,15 @@ import java.util.List;
  *
  * @author hp
  */
-
 public interface StudentInfoDao {
-      
-      public String getMsg();
-      
-      public List getRecord(String hql);
 
-      public int save(StudentInfo obj);
+    public String getMsg();
 
-      public int update(StudentInfo obj);
+    public List getRecord(String hql);
 
-      public int delete(String hql);
+    public int save(StudentInfo obj);
+
+    public int update(StudentInfo obj);
+
+    public int delete(String hql);
 }

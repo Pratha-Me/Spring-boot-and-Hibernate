@@ -13,12 +13,12 @@ import com.model.StudentInfo;
  */
 public interface StudentInfoService {
 
-      public Object getRecord();
+    public Object getRecord();
 
-      public Object doSave(StudentInfo obj, String Authorization);
+    public Object doSave(StudentInfo obj, String Authorization);
 
-      public Object doUpdate(StudentInfo obj, Long id);
+    public Object doUpdate(StudentInfo obj, Long id, String Authorization);
 
-      public Object doDelete(Long id);
+    public Object doDelete(Long id, String Authorization);
 
 }

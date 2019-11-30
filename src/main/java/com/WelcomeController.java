@@ -31,7 +31,7 @@ public class WelcomeController {
     @RequestMapping(value = "/Login/{token}", method = RequestMethod.GET)
     public String index(HttpSession session, @PathVariable String token) {
         session.setAttribute("token", "Bearer " + token);
-        return "StudentInfo";
+        return "StudentGrades";
     }
 
     @RequestMapping(value = "/Login", method = RequestMethod.GET)

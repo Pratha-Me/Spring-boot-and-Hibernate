@@ -26,6 +26,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Autowired
     StudentInfoDao dao;
+    
     Message msg = new Message();
 
     @Override
@@ -61,12 +62,30 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
-    public Object doUpdate(StudentInfo obj, Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object doUpdate(StudentInfo obj, Long id, String Authorization) {
+        Token td = new Token(Authorization);
+        if (!td.isValid()){
+            return msg.respondWithError("Authorization Failed");
+        }
+        obj.setId(id);
+        int count = dao.update(obj);
+        if (count ==1) {
+            return msg.respondWithMessage("Update Successful!");
+        }
+        return msg.respondWithError(dao.getMsg());
     }
 
     @Override
-    public Object doDelete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object doDelete(Long id, String Authorization) {
+        Token td = new Token(Authorization);
+        if (!td.isValid()){
+            return msg.respondWithError("Authorization Failed");
+        }
+        String sql = "delete from student_info where id=" + id;
+        int count = msg.db.delete(sql);
+        if (count == 1){
+            return msg.respondWithMessage("Deletion Succesful");
+        }
+        return msg.respondWithError(dao.getMsg());
     }
 }

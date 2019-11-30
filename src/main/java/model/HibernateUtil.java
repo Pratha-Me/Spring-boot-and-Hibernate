@@ -29,7 +29,7 @@ public class HibernateUtil {
                   property.setProperty("hibernate.hbm2ddl.auto", "update");
                   property.setProperty("hibernate.show_sql", "true");
                   sessionFactory = new Configuration()
-                        .addAnnotatedClass(StudentInfo.class)
+                        .addAnnotatedClass(StudentGrades.class)
                         .addProperties(property)
                         .buildSessionFactory();
             } catch (Throwable ex) {
