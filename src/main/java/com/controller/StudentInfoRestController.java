@@ -23,26 +23,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentInfoRestController {
 
       @Autowired
-      StudentInfoService infoservice;
+      StudentInfoService infoService;
 
       @GetMapping
       public Object index() {
-            return infoservice.getRecord();
+            return infoService.getRecord();
       }
 
       @PostMapping
       public Object doSave(@RequestBody StudentInfo obj, @RequestHeader(value ="Authorization") String Authorization){
-            return infoservice.doSave(obj, Authorization);
+            return infoService.doSave(obj, Authorization);
       }
       
       @PutMapping("/{id}")
       public Object doUpdate(@PathVariable long id, @RequestBody StudentInfo obj,@RequestHeader(value ="Authorization") String Authorization){
-          return infoservice.doUpdate(obj, id, Authorization);
+          return infoService.doUpdate(obj, id, Authorization);
       }
       
       @DeleteMapping("/{id}")
       public Object doDelete(@PathVariable long id, @RequestBody StudentInfo obj, @RequestHeader(value = "Authorization") String Authorization){
-          return infoservice.doDelete(id, Authorization);
+          return infoService.doDelete(id, Authorization);
       }
 }
 

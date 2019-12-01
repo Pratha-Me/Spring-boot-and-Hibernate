@@ -23,13 +23,8 @@ public class StudentPayServiceImpl implements StudentPayService {
     Message msg = new Message();
 
     @Override
-    public Object getRecord() {
-        /*        Token tdRec = new Token();
-        //        System.out.println(Authorization);
-        //        System.out.println(tdRec.isValid());
-        if (!tdRec.isValid()) {
-        return msg.respondWithError("Authorization Error");
-        }*/
+    public Object getRecord(String Authorization) {
+        System.out.println(Authorization);
         List list = dao.getRecord("from StudentPay");
         if (!list.isEmpty()) {
             return list;
@@ -67,7 +62,6 @@ public class StudentPayServiceImpl implements StudentPayService {
             return msg.respondWithMessage("Success");
         }
         return msg.respondWithError(dao.getMsg());
-
     }
 
     @Override
@@ -76,7 +70,7 @@ public class StudentPayServiceImpl implements StudentPayService {
         if (!td.isValid()) {
             return msg.respondWithError("Authorization Error");
         }
-        String sql = "delete from student_pay where id=" + id;
+        String sql = "DELETE FROM student_pay WHERE ID=" + id;
         int count = msg.db.save(sql);
         if (count == 1) {
             return msg.respondWithMessage("Success");

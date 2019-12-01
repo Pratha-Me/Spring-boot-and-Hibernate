@@ -13,7 +13,7 @@ import com.model.StudentPay;
  */
 public interface StudentPayService {
 
-      public Object getRecord();
+      public Object getRecord(String Authorization);
 
       public Object doSave(StudentPay obj, String Authorization);
 

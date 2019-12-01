@@ -26,8 +26,8 @@ public class StudentPayRestController {
     StudentPayService payService;
 
     @GetMapping
-    public Object index() {
-        return payService.getRecord();
+    public Object index(@RequestHeader(value = "Authorization") String Authorization) {
+        return payService.getRecord(Authorization);
     }
 
     @PostMapping

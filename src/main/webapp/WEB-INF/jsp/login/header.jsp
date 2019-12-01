@@ -7,11 +7,11 @@
         <%
 
             String path = request.getContextPath();
-            String token = "";
+            String token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJBRE1JTiIsInN1YiI6IkFETUlOIiwiYXVkIjoiQURNIiwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNTc1MTY3NjU3LCJleHAiOjE1NzUyNTQwNTd9.Oyce8iEyyTfc8m0btZajpIoBaoYa-_HEekIFza_-Pss";
             try {
-                token = session.getAttribute("token").toString();
+                token = session.getAttribute("Authorization").toString();
               
-                if (token.length() < 100) {
+                if (token.length() < 10) {
                     out.print("<script>window.location.assign('" + path + "');</script>");
                 }
 
@@ -28,7 +28,6 @@
         <meta name="description" content="NOU">
         <meta name="keywords" content="NOUn">
         <meta name="author" content="NOU">
-        <meta name="copyright" content="">
         <meta name="robots" content="index, follow" />
         <link rel="shortcut icon" type="image/x-icon" href="<%=path%>/Bootstrap/favicon.ico">
         <script>
@@ -74,7 +73,9 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Setup  
                         <span class="caret"></span></a>            
                     <ul class="dropdown-menu" > 
-                       
+                        <li><a href="StudentGrades">Student Grades</a></li>
+                        <li><a href="StudentInfo">Student Info</a></li>
+                        <li><a href="StudentPay">Student Pay</a></li>
 
                     </ul>
                 </li>

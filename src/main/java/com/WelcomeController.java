@@ -8,12 +8,10 @@ package com;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import model.DB;
 import model.Token;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,10 +26,19 @@ public class WelcomeController {
         return "index";
     }
 
-    @RequestMapping(value = "/Login/{token}", method = RequestMethod.GET)
-    public String index(HttpSession session, @PathVariable String token) {
-        session.setAttribute("token", "Bearer " + token);
-        return "StudentGrades";
+    @RequestMapping(value = "Logout", method = RequestMethod.GET)
+    public String Logout() {
+        return "Logout";
+    }
+
+    @RequestMapping(value = "/Login/Verify", method = RequestMethod.GET)
+    public String verify() {
+        return "login/Verify";
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home() {
+        return "home";
     }
 
     @RequestMapping(value = "/Login", method = RequestMethod.GET)

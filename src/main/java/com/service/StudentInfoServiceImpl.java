@@ -7,7 +7,6 @@ package com.service;
 
 import com.dao.StudentInfoDao;
 import com.model.StudentInfo;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import model.Message;
 import model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  *
@@ -81,8 +79,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         if (!td.isValid()){
             return msg.respondWithError("Authorization Failed");
         }
-        String sql = "delete from student_info where id=" + id;
-        int count = msg.db.delete(sql);
+        String sql = "DELETE FROM student_info WHERE ID=" + id;
+        int count = msg.db.save(sql);
         if (count == 1){
             return msg.respondWithMessage("Deletion Succesful");
         }

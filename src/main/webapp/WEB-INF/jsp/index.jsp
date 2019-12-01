@@ -38,12 +38,10 @@
                 <section>
                     <img src="<%=path%>/Bootstrap/image/user.jpg" alt="" class="img-responsive" />
                     <div>
-                        <input type='email' name="email" placeholder="email" id='email' class='form-control' 
-                               required=""/>
+                        <input type='email' name="email" placeholder="email" id='email' class='form-control' value="ADMIN" required=""/>
                     </div>
                     <div >
-                        <input type='password' name="name" placeholder="password" id='password' class='form-control'
-                               required=""/>
+                        <input type='password' name="name" placeholder="password" id='password' class='form-control' value="ADMIN" required=""/>
 			
                     </div>
 		    
@@ -63,13 +61,12 @@
 			$('.btn').button('loading');
 			var email = document.getElementById('email').value;
 			var password = document.getElementById('password').value;
-			$.ajax({type: "GET", url: "<%=path%>/Login?password=" + password + "&loginId=" + 
-				email, contentType: "application/json; charset=utf-8", dataType: "json",
+			$.ajax({type: "GET", url: "<%=path%>/Login?password=" + password + "&loginId=" +email, contentType: "application/json; charset=utf-8", dataType: "json",
 				success: function (data)
 				{
 					$('.btn').button('reset'); 
 					if(data.msg){ 
-                                    window.location.assign("<%=path%>/Login/"+data.token);						
+                                    window.location.assign("<%=path%>//Login/Verify?token="+data.token);						
 					} else {
 						messages(data.error);
 					}
