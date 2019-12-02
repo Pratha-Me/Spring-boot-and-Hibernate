@@ -17,7 +17,6 @@ import model.Message;
 public class StudentPayDaoImpl implements StudentPayDao {
 
     String msg = "";
-    private final Message msgPkg = new Message();
 
     @Override
     public List getRecord(String hql) {
@@ -27,7 +26,7 @@ public class StudentPayDaoImpl implements StudentPayDao {
             session.close();
             return list;
         } catch (Exception e) {
-            msg = msgPkg.exceptionMsg(e);
+            msg = Message.exceptionMsg(e);
         }
         try {
             session.close();
@@ -48,7 +47,7 @@ public class StudentPayDaoImpl implements StudentPayDao {
             return 1;
         } catch (Exception e) {
             tr.rollback();
-            msg = msgPkg.exceptionMsg(e);
+            msg = Message.exceptionMsg(e);
         }
         try {
             session.close();
@@ -69,7 +68,7 @@ public class StudentPayDaoImpl implements StudentPayDao {
             return 1;
         } catch (Exception e) {
             tr.rollback();
-            msg = msgPkg.exceptionMsg(e);
+            msg = Message.exceptionMsg(e);
         }
         try {
             session.close();
@@ -86,7 +85,7 @@ public class StudentPayDaoImpl implements StudentPayDao {
             count = session.createSQLQuery(hql).executeUpdate();
             session.close();
         } catch (Exception e) {
-            msg = msgPkg.exceptionMsg(e);
+            msg = Message.exceptionMsg(e);
             count = 0;
         }
         try {

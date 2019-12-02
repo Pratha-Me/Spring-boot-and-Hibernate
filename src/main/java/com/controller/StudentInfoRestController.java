@@ -22,28 +22,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/StudentInfo")
 public class StudentInfoRestController {
 
-      @Autowired
-      StudentInfoService infoService;
+    @Autowired
+    StudentInfoService service;
 
-      @GetMapping
-      public Object index() {
-            return infoService.getRecord();
-      }
+    @GetMapping
+    public Object index() {
+        return service.getRecord();
+    }
 
-      @PostMapping
-      public Object doSave(@RequestBody StudentInfo obj, @RequestHeader(value ="Authorization") String Authorization){
-            return infoService.doSave(obj, Authorization);
-      }
-      
-      @PutMapping("/{id}")
-      public Object doUpdate(@PathVariable long id, @RequestBody StudentInfo obj,@RequestHeader(value ="Authorization") String Authorization){
-          return infoService.doUpdate(obj, id, Authorization);
-      }
-      
-      @DeleteMapping("/{id}")
-      public Object doDelete(@PathVariable long id, @RequestBody StudentInfo obj, @RequestHeader(value = "Authorization") String Authorization){
-          return infoService.doDelete(id, Authorization);
-      }
+    @PostMapping
+    public Object doSave(@RequestBody StudentInfo obj, @RequestHeader(value = "Authorization") String Authorization) {
+        return service.doSave(obj, Authorization);
+    }
+
+    @PutMapping("/{id}")
+    public Object doUpdate(@PathVariable long id, @RequestBody StudentInfo obj, @RequestHeader(value = "Authorization") String Authorization) {
+        return service.doUpdate(obj, id, Authorization);
+    }
+
+    @DeleteMapping("/{id}")
+    public Object doDelete(@PathVariable long id, @RequestHeader(value = "Authorization") String Authorization) {
+        return service.doDelete(id, Authorization);
+    }
 }
 
 /*@RestController

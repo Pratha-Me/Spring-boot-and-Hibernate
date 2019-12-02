@@ -88,6 +88,9 @@
         });
         var URL = "<%=path%>/api/StudentPay/" + document.getElementById('id').value;
         callApi(URL, requestData, "PUT");
+        $('#Update').hide();
+        $('#Save').show();
+        document.getElementById('Save').focus();
     }
 
     function getRecord()
@@ -95,15 +98,15 @@
         var URL = "<%=path%>/api/StudentPay";
         $.ajax({type: "GET", url: URL, headers: {'Authorization': '<%=token%>'}, contentType: "application/json; charset=utf-8", dataType: "json", success: function (data) {
                 if (data.length == 0) {
-                messages('Record Not Found');
-                        document.getElementById('table').innerHTML = '';
-                        return false;
+                    messages('Record Not Found');
+                    document.getElementById('table').innerHTML = '';
+                    return false;
                 }
                 document.getElementById('table').innerHTML = "<table class = 'table table-bordered table-hover table-striped' id = 'dataTable'><thead><tr> <th hidden> id </th><th>Name</th> <th> Amount </th><th>Action</th></tr></thead ><tbody></tbody></table>";
-                        var tableData;
+                var tableData;
                 for (var i = 0; i < data.length; i++)
                 {
-                    tableData = "<tr><td hidden>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].amount + "</td><td><a onclick='edit(" + (i + 1) + ")' class='glyphicon glyphicon-edit'></a> | <a onclick='recordDelete(" +  data[i].id+ ")' class='glyphicon glyphicon-remove-circle'></a></td></tr>";
+                    tableData = "<tr><td hidden>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].amount + "</td><td><a onclick='edit(" + (i + 1) + ")' class='glyphicon glyphicon-edit'></a> | <a onclick='recordDelete(" + data[i].id + ")' class='glyphicon glyphicon-remove-circle'></a></td></tr>";
                     $('#dataTable').append(tableData);
                 }
             }

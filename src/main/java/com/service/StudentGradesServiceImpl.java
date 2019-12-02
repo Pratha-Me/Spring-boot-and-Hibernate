@@ -23,17 +23,17 @@ import org.springframework.stereotype.Service;
 public class StudentGradesServiceImpl implements StudentGradesService {
 
     @Autowired
-    StudentGradesDao dao; 
-    
+    StudentGradesDao dao;
+
     Message msg = new Message();
-         
+
     @Override
     public Object getRecord() {
         List list = dao.getRecord("from StudentGrades");
-        if (!list.isEmpty()){
+        if (!list.isEmpty()) {
             return list;
         }
-        
+
         return msg.respondWithError(dao.getMsg());
 
     }
@@ -41,33 +41,51 @@ public class StudentGradesServiceImpl implements StudentGradesService {
     @Override
     public Object doSave(StudentGrades obj, String Authorization) {
         Token td = new Token(Authorization);
-        if (!td.isValid()){
+        if (!td.isValid()) {
             return msg.respondWithError("Authorization failed");
         }
-        
+
         obj.setEnterby(td.getUserId());
         obj.setEnterDate(new Date());
-        
+
         String sql = "SELECT IFNULL(MAX(ID),0)+1 AS id FROM Student_Grades";
         msg.map = (Map) msg.db.getRecord(sql).get(0);
         obj.setId(Long.parseLong(msg.map.get("id").toString()));
-        
+
         int count = dao.save(obj);
         if (count == 1) {
             return msg.respondWithMessage("Saved Successfully");
         }
-        
+
         return msg.respondWithError(dao.getMsg());
     }
 
     @Override
     public Object doUpdate(StudentGrades obj, Long id, String Authorization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Token td = new Token(Authorization);
+        if (!td.isValid()) {
+            return msg.respondWithError("Authorization Error");
+        }
+
+        obj.setId(id);
+        int count = dao.update(obj);
+        if (count == 1) {
+            return msg.respondWithMessage("Success");
+        }
+        return msg.respondWithError(dao.getMsg());
     }
 
     @Override
     public Object doDelete(Long id, String Authorization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Token td = new Token(Authorization);
+        if (!td.isValid()) {
+            return msg.respondWithError("Authorization Error");
+        }
+        String sql = "DELETE FROM student_pay WHERE ID=" + id;
+        int count = msg.db.save(sql);
+        if (count == 1) {
+            return msg.respondWithMessage("Success");
+        }
+        return msg.respondWithError(dao.getMsg());
     }
-    
 }

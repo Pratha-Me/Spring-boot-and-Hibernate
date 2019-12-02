@@ -7,10 +7,12 @@ package com.controller;
 
 import com.model.StudentGrades;
 import com.service.StudentGradesService;
-import model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +27,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentGradesRestController {
 
     @Autowired
-    StudentGradesService gradesService;
+    StudentGradesService service;
 
     @GetMapping
     public Object index() {
-        return gradesService.getRecord();
+        return service.getRecord();
     }
 
     @PostMapping
     public Object doSave(@RequestBody StudentGrades obj, @RequestHeader(value="Authoriation") String Authorization){
-        return gradesService.doSave(obj, Authorization);
+        return service.doSave(obj, Authorization);
+    }
+    
+    @PutMapping("/{id}")
+    public Object doUpdate(@PathVariable long id, @RequestBody StudentGrades obj, @RequestHeader(value = "Authorization") String Authorization) {
+        return service.doUpdate(obj, id, Authorization);
+    }
+
+    @DeleteMapping("/{id}")
+    public Object doDelete(@PathVariable long id, @RequestHeader(value = "Authorization") String Authorization) {
+        return service.doDelete(id, Authorization);
     }
 }
       /*      

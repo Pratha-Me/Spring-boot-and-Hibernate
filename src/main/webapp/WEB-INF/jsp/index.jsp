@@ -41,7 +41,7 @@
                         <input type='email' name="email" placeholder="email" id='email' class='form-control' value="ADMIN" required=""/>
                     </div>
                     <div >
-                        <input type='password' name="name" placeholder="password" id='password' class='form-control' value="ADMIN" required=""/>
+                        <input type='password' name="name" placeholder="password" id='password' class='form-control' required=""/>
 			
                     </div>
 		    

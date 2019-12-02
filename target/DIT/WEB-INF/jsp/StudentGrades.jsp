@@ -5,28 +5,28 @@
 --%>
 <%@include file="login/header.jsp" %>
 <fieldset>  <legend>ADD GPA</legend> 
-      <form method='POST' id='dataFrom'> 
-            <div class="row">
-                <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6' hidden="">
-                        <label>id</label>
-                        <input type='text' name='id' id='id' class='form-control'/>
-                  </div>
-                  <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6'>
-                        <label>name</label>
-                        <input type='text' name='name' id='name' class='form-control'/>
-                  </div>
-                  <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6'>
-                        <label>GPA</label>
-                        <input type='text' name='gpa' id='gpa' class='form-control'/>
-                  </div>
-
-                  <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6'>
-
-                        <label id='ActionMSG'>&nbsp;</label><br>
-                        <input type='button' onclick='doSave()' id='Save' value='Save' class='btn btn-success'/>
-                        <input type='button' onclick='doUpdate()'  id='Update' value='Update' class='btn btn-success' style='display: none'/></div>
+    <form method='POST' id='dataFrom'> 
+        <div class="row">
+            <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6' hidden="">
+                <label>id</label>
+                <input type='text' name='id' id='id' class='form-control'/>
             </div>
-      </form>
+            <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6'>
+                <label>name</label>
+                <input type='text' name='name' id='name' class='form-control'/>
+            </div>
+            <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6'>
+                <label>GPA</label>
+                <input type='text' name='gpa' id='gpa' class='form-control'/>
+            </div>
+
+            <div class='col-lg-2 col-sm-2 col-md-2 col-xs-6'>
+
+                <label id='ActionMSG'>&nbsp;</label><br>
+                <input type='button' onclick='doSave()' id='Save' value='Save' class='btn btn-success'/>
+                <input type='button' onclick='doUpdate()'  id='Update' value='Update' class='btn btn-success' style='display: none'/></div>
+        </div>
+    </form>
 </fieldset> 
 
 <br> <fieldset>  <legend>Details</legend> 
@@ -42,7 +42,7 @@
         $('#Save').hide();
         document.getElementById('Update').focus();
     }
-    
+
     function callApi(URL, requestData, apiMethod)
     {
         $('.btn').button('loading');
@@ -76,7 +76,7 @@
         var URL = "<%=path%>/api/StudentGrades";
         callApi(URL, requestData, "POST");
     }
-    
+
     function doUpdate()
     {
         var dataForm = $('form').serializeArray();
@@ -86,19 +86,22 @@
         });
         var URL = "<%=path%>/api/StudentGrades/" + document.getElementById('id').value;
         callApi(URL, requestData, "PUT");
+        $('#Update').hide();
+        $('#Save').show();
+        document.getElementById('Save').focus();
     }
-    
+
     function getRecord()
     {
         var URL = "<%=path%>/api/StudentGrades";
         $.ajax({type: "GET", url: URL, headers: {'Authorization': '<%=token%>'}, contentType: "application/json; charset=utf-8", dataType: "json", success: function (data) {
                 if (data.length == 0) {
-                messages('Record Not Found');
-                        document.getElementById('table').innerHTML = '';
-                        return false;
+                    messages('Record Not Found');
+                    document.getElementById('table').innerHTML = '';
+                    return false;
                 }
                 document.getElementById('table').innerHTML = "<table class = 'table table-bordered table-hover table-striped' id = 'dataTable'><thead><tr><th hidden> id </th><th>Name</th><th> Grades </th><th>Action</th></tr></thead><tbody></tbody></table>";
-                        var tableData;
+                var tableData;
                 for (var i = 0; i < data.length; i++)
                 {
                     tableData = "<tr><td hidden>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].gpa + "</td><td><a onclick='edit(" + (i + 1) + ")' class='glyphicon glyphicon-edit'></a> | <a onclick='recordDelete(" + data[i].id + ")' class='glyphicon glyphicon-remove-circle'></a></td></tr>";
@@ -107,14 +110,14 @@
             }
         });
     }
-    
+
     function recordDelete(id) {
         if (!confirm('Are you sure'))
             return;
         var URL = "<%=path%>/api/StudentGrades/" + id;
         callApi(URL, "", "DELETE");
     }
-    
+
     getRecord();
 
 

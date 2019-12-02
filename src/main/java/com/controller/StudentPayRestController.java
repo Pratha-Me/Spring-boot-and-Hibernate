@@ -23,25 +23,25 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public class StudentPayRestController {
 
     @Autowired
-    StudentPayService payService;
+    StudentPayService service;
 
     @GetMapping
     public Object index(@RequestHeader(value = "Authorization") String Authorization) {
-        return payService.getRecord(Authorization);
+        return service.getRecord(Authorization);
     }
 
     @PostMapping
     public Object doSave(@RequestBody StudentPay obj, @RequestHeader(value = "Authorization") String Authorization) {
-        return payService.doSave(obj, Authorization);
+        return service.doSave(obj, Authorization);
     }
 
     @PutMapping("/{id}")
     public Object doUpdate(@PathVariable long id, @RequestBody StudentPay obj, @RequestHeader(value = "Authorization") String Authorization) {
-        return payService.doUpdate(obj, id, Authorization);
+        return service.doUpdate(obj, id, Authorization);
     }
 
     @DeleteMapping("/{id}")
     public Object doDelete(@PathVariable long id,  @RequestHeader(value = "Authorization") String Authorization) {
-        return payService.doDelete(id, Authorization);
+        return service.doDelete(id, Authorization);
     }
 }
