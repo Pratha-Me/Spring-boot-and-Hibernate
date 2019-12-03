@@ -2,7 +2,7 @@
 * To change this license header, choose License Headers in Project Properties.
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
- */
+*/
 package com.controller;
 
 import com.model.StudentGrades;
@@ -35,10 +35,10 @@ public class StudentGradesRestController {
     }
 
     @PostMapping
-    public Object doSave(@RequestBody StudentGrades obj, @RequestHeader(value="Authoriation") String Authorization){
+    public Object doSave(@RequestBody StudentGrades obj, @RequestHeader(value="Authorization") String Authorization){
         return service.doSave(obj, Authorization);
     }
-    
+
     @PutMapping("/{id}")
     public Object doUpdate(@PathVariable long id, @RequestBody StudentGrades obj, @RequestHeader(value = "Authorization") String Authorization) {
         return service.doUpdate(obj, id, Authorization);

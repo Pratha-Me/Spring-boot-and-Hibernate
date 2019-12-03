@@ -42,7 +42,7 @@ public class WelcomeController {
     public String home() {
         return "home";
     }
-    
+
     @RequestMapping(value = "/Login/{token}", method = RequestMethod.GET)
     public String index(HttpSession session, @PathVariable String token) {
         session.setAttribute("token", "Bearer " + token);

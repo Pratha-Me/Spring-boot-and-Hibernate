@@ -81,7 +81,7 @@ public class StudentGradesServiceImpl implements StudentGradesService {
         if (!td.isValid()) {
             return msg.respondWithError("Authorization Error");
         }
-        String sql = "DELETE FROM student_pay WHERE ID=" + id;
+        String sql = "DELETE FROM Student_Grades WHERE ID=" + id;
         int count = msg.db.save(sql);
         if (count == 1) {
             return msg.respondWithMessage("Success");
