@@ -15,8 +15,8 @@ public class DB {
         int a = 0;
         try {
             a = session.createSQLQuery(sql).executeUpdate();
-            session.close();
             tr.commit();
+            session.close();
             setMsg("Success");
         } catch (Exception e) {
             setMsg(model.Message.exceptionMsg(e));
@@ -39,8 +39,8 @@ public class DB {
                 query.setParameter(i, parameterValue[i]);
             }
             a = query.executeUpdate();
-            session.close();
             tr.commit();
+            session.close();
             setMsg("Success");
         } catch (Exception e) {
             setMsg(model.Message.exceptionMsg(e));
@@ -63,8 +63,8 @@ public class DB {
                 query.setParameter(parameter[i], parameterValue[i]);
             }
             a = query.executeUpdate();
-            session.close();
             tr.commit();
+            session.close();
             setMsg("Success");
         } catch (Exception e) {
             setMsg(model.Message.exceptionMsg(e));
@@ -83,8 +83,8 @@ public class DB {
         Transaction tr = session.beginTransaction();
         try {
             a = session.createSQLQuery(sql).executeUpdate();
-            session.close();
             tr.commit();
+            session.close();
             setMsg("Success");
         } catch (Exception e) {
             setMsg(model.Message.exceptionMsg(e));
@@ -104,7 +104,7 @@ public class DB {
             session.close();
             return list;
         } catch (Exception e) {
-            System.out.println(e);
+//            System.out.println(e);
             msg = model.Message.exceptionMsg(e);
         }
         try {
